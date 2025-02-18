@@ -1,41 +1,41 @@
 import db from '../config/database.js';
 
 db.run(`
-    CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS clients (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        avatar TEXT
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        phone VARCHAR(20) NOT NULL,
+        address TEXT NOT NULL
     )
 `)
 
-function createUserRepository(newUser){
+function createClientRepository(newClient){
     return new Promise((resolve, reject) =>{
-        const {username, email, password, avatar} = newUser;
+        const {name, email, phone, address} = newClient;
         db.run(
             `
-                INSERT INTO users (username, email, password, avatar)
+                INSERT INTO clients (name, email, phone, address)
                 VALUES (?, ?, ?, ?)
             `,
-            [username, email, password, avatar],
+            [name, email, phone, address],
             function (err){
                 if(err){
                     reject(err);
                 }else{
-                    resolve({id: this.lastID, ...newUser});
+                    resolve({id: this.lastID, ...newClient});
                 }
             }
         );
     })
 };
 
-function findUserByEmailRepository(email){
+function findClientByEmailRepository(email){
         return new Promise ((resolve, reject) =>{
             db.get(
                 `
-                    SELECT id, username, email, password, avatar 
-                    FROM users
+                    SELECT id, name, email, phone, address 
+                    FROM clients
                     WHERE email = ?
                 `, [email], 
                 (err, row) => {
@@ -48,12 +48,12 @@ function findUserByEmailRepository(email){
         });
 };
 
-function findUserByIdRepository(id){
+function findClientByIdRepository(id){
     return new Promise ((resolve, reject) =>{
         db.get(
             `
-                SELECT id, username, email, avatar 
-                FROM users
+                SELECT id, name, email, phone, address 
+                FROM clients
                 WHERE id = ?
             `, [id], 
             (err, row) => {
@@ -66,10 +66,10 @@ function findUserByIdRepository(id){
     });
 };
 
-async function deleteUserRepository(id){
+async function deleteClientRepository(id){
     return new Promise((resolve, reject)=>{
         db.run(`
-            DELETE FROM users
+            DELETE FROM clients
             WHERE id = ?
             `,
             [id],
@@ -77,17 +77,17 @@ async function deleteUserRepository(id){
                 if(err){
                     reject(err);
                 } else{
-                    resolve({message: "User deleted successfully", id});
+                    resolve({message: "Client deleted successfully", id});
                 }
             }
         )
     })
 };
 
-function findAllUserRepository(){
+function findAllClientRepository(){
     return new Promise((resolve, reject) => {
         db.all(`
-            SELECT id, username, email, avatar FROM users
+            SELECT id, name, email, phone, address FROM clients
         `,
         [],
         (err, rows) => {
@@ -100,17 +100,17 @@ function findAllUserRepository(){
     });
 };
 
-function updateUserRepository(id, user){
+function updateClientRepository(id, client){
     return new Promise ((resolve, reject) =>{
-        const {username, email, password, avatar} = user;
-        const fields =['username', 'email', 'password', 'avatar'];
-        let query = "UPDATE users SET ";
+        const {name, email, phone, address} = client;
+        const fields =['name', 'email', 'phone', 'address'];
+        let query = "UPDATE clients SET ";
         const values = []
 
         fields.forEach((field)=>{
-            if(user[field] !== undefined){
+            if(client[field] !== undefined){
                 query += `${field} = ?,`
-                values.push(user[field]);
+                values.push(client[field]);
             }
         })
 
@@ -124,17 +124,17 @@ function updateUserRepository(id, user){
             if(err){
                 reject(err);
             }else{
-                resolve({...user, id})
+                resolve({...client, id})
             }
         })
     });
 };
 
 export default {
-    createUserRepository,
-    findUserByEmailRepository,
-    findUserByIdRepository,
-    findAllUserRepository,
-    updateUserRepository,
-    deleteUserRepository
+    createClientRepository,
+    findClientByEmailRepository,
+    findClientByIdRepository,
+    findAllClientRepository,
+    updateClientRepository,
+    deleteClientRepository
 }
