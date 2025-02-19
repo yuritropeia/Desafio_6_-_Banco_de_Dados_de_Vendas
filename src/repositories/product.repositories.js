@@ -117,7 +117,7 @@ function searchProductsRepository(search){
             `
                 SELECT * 
                 FROM products
-                WHERE title LIKE ? OR author LIKE ?
+                WHERE name LIKE ? OR descrition LIKE ?
             `, [`%${search}%`, `%${search}%`], 
             (err, rows) => {
                 if (err){
