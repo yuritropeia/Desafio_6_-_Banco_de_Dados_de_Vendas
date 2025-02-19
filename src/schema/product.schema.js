@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-const bookSchema = z.object({
+const productSchema = z.object({
     name: z.string().min(1, "Name is required"),
     descrition: z.string().min(1, "Descrition is required"),
     price: z
@@ -11,8 +11,8 @@ const bookSchema = z.object({
     }),
 });
 
-const bookIdSchema = z.object({
+const productIdSchema = z.object({
     productId: z.number().int().positive("Product ID must be a positive integer"),
 });
 
-export {bookSchema, bookIdSchema}
+export {productSchema, productIdSchema}

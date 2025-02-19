@@ -1,39 +1,38 @@
 import db from '../config/database.js';
 
 db.run(`
-    CREATE TABLE IF NOT EXISTS books (
+    CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        author TEXT NOT NULL,
-        userId INTEGER,
-        FOREIGN KEY (userId) REFERENCES users(id)
+        name VARCHAR(255) NOT NULL,
+        descrition TEXT,
+        price DECIMAL(10,2) NOT NULL
     )
 `);
 
-function createBookRepository(newBook, userId){
+function createProductRepository(newProduct){
     return new Promise((resolve, reject) =>{
-        const {title, author} = newBook;
+        const {name, descrition, price} = newProduct;
         db.run(
             `
-                INSERT INTO books (title, author, userId)
+                INSERT INTO products (name, descrition, price)
                 VALUES (?, ?, ?)
             `,
-            [title, author, userId],
+            [name, descrition, price],
             function (err){
                 if(err){
                     reject(err);
                 }else{
-                    resolve({id: this.lastID, ...newBook});
+                    resolve({id: this.lastID, ...newProduct});
                 }
             }
         );
     })
 };
 
-function findAllBooksRepository(){
+function findAllProductsRepository(){
     return new Promise((resolve, reject) => {
         db.all(`
-            SELECT * FROM books
+            SELECT * FROM products
         `,
         [],
         (err, rows) => {
@@ -46,14 +45,14 @@ function findAllBooksRepository(){
     });
 };
 
-function findBookByIdRepository(bookId){
+function findProductByIdRepository(productId){
     return new Promise ((resolve, reject) =>{
         db.get(
             `
                 SELECT * 
-                FROM books
+                FROM products
                 WHERE id = ?
-            `, [bookId], 
+            `, [productId], 
             (err, row) => {
                 if (err){
                     reject(err);
@@ -64,35 +63,35 @@ function findBookByIdRepository(bookId){
     });
 };
 
-async function deleteBookRepository(bookId){
+async function deleteProductRepository(productId){
     return new Promise((resolve, reject)=>{
         db.run(`
-            DELETE FROM books
+            DELETE FROM products
             WHERE id = ?
             `,
-            [bookId],
+            [productId],
             (err) => {
                 if(err){
                     reject(err);
                 } else{
-                    resolve({message: "Book deleted successfully", bookId});
+                    resolve({message: "Product deleted successfully", productId});
                 }
             }
         )
     })
 };
 
-function updateBookRepository(updatedBook, bookId){
+function updateProductRepository(updatedProduct, productId){
     return new Promise ((resolve, reject) =>{
-        const {title, author, userId} = updatedBook;
-        const fields =['title', 'author', 'userId'];
-        let query = "UPDATE books SET ";
+        const {name, descrition, price} = updatedProduct;
+        const fields =['name', 'descrition', 'price'];
+        let query = "UPDATE products SET ";
         const values = []
 
         fields.forEach((field)=>{
-            if(updatedBook[field] !== undefined){
+            if(updatedProduct[field] !== undefined){
                 query += `${field} = ?,`
-                values.push(updatedBook[field]);
+                values.push(updatedProduct[field]);
             }
         })
 
@@ -100,24 +99,24 @@ function updateBookRepository(updatedBook, bookId){
 
         query += " WHERE id = ?";
 
-        values.push(bookId);
+        values.push(productId);
 
         db.run(query, values, (err) => {
             if(err){
                 reject(err);
             }else{
-                resolve({id: bookId, ...updatedBook})
+                resolve({id: productId, ...updatedProduct})
             }
         })
     });
 };
 
-function searchBooksRepository(search){
+function searchProductsRepository(search){
     return new Promise ((resolve, reject) =>{
         db.all(
             `
                 SELECT * 
-                FROM books
+                FROM products
                 WHERE title LIKE ? OR author LIKE ?
             `, [`%${search}%`, `%${search}%`], 
             (err, rows) => {
@@ -132,11 +131,10 @@ function searchBooksRepository(search){
 }
 
 export default {
-    createBookRepository,
-    
-    findAllBooksRepository,
-    findBookByIdRepository,
-    updateBookRepository,
-    deleteBookRepository,
-    searchBooksRepository
+    createProductRepository,
+    findAllProductsRepository,
+    findProductByIdRepository,
+    updateProductRepository,
+    deleteProductRepository,
+    searchProductsRepository
 }
