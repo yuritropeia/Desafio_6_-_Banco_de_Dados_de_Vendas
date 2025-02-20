@@ -1,42 +1,41 @@
 import db from '../config/database.js';
 
 db.run(`
-    CREATE TABLE IF NOT EXISTS stock (
+    CREATE TABLE IF NOT EXISTS sales (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        product_id INT UNIQUE NOT NULL,
-        quantity INT NOT NULL,
-        update_date TEXT DEFAULT (strftime('%d-%m-%Y', 'now')),
-        FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+        order_id INT UNIQUE NOT NULL,
+        total DECIMAL(10,2) NOT NULL,
+        sale_date TEXT DEFAULT (strftime('%d-%m-%Y', 'now')),
+        FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
     )
 `);
 
 
-function createStockRepository(newStock){
+function createSalesRepository(newSales){
     return new Promise((resolve, reject) =>{
-        const {product_id, quantity, update_date} = newStock;
+        const {order_id, total, sale_date} = newSales;
         db.run(
             `
-                INSERT INTO stock (product_id, quantity, update_date)
+                INSERT INTO sales (order_id, total, sale_date)
                 VALUES (?, ?, ?)
             `,
-            [product_id, quantity, update_date],
+            [order_id, total, sale_date],
             function (err){
                 if(err){
                     reject(err);
                 }else{
-                    resolve({id: this.lastID, ...newStock});
+                    resolve({id: this.lastID, ...newSales});
                 }
             }
         );
     })
 };
 
-function findAllStockRepository(){
+function findAllSalesRepository(){ //melhorar esta amostragem com outras caracter[isticas]
     return new Promise((resolve, reject) => {
         db.all(`
-            SELECT stock.id, products.name, stock.quantity, stock.update_date 
-            FROM stock
-            JOIN products ON stock.product_id = products.id
+            SELECT sales.id, sales.total, sales.sale_date 
+            FROM sales
         `,
         [],
         (err, rows) => {
@@ -49,14 +48,14 @@ function findAllStockRepository(){
     });
 };
 
-function findStockByIdRepository(stockId){
+function findSalesByIdRepository(salesId){
     return new Promise ((resolve, reject) =>{
         db.get(
             `
                 SELECT * 
-                FROM stock
+                FROM sales
                 WHERE id = ?
-            `, [stockId], 
+            `, [salesId], 
             (err, row) => {
                 if (err){
                     reject(err);
@@ -67,35 +66,35 @@ function findStockByIdRepository(stockId){
     });
 };
 
-async function deleteStockRepository(stockId){
+async function deleteSalesRepository(salesId){
     return new Promise((resolve, reject)=>{
         db.run(`
-            DELETE FROM stock
+            DELETE FROM sales
             WHERE id = ?
             `,
-            [stockId],
+            [salesId],
             (err) => {
                 if(err){
                     reject(err);
                 } else{
-                    resolve({message: "Stock deleted successfully", stockId});
+                    resolve({message: "Sales deleted successfully", salesId});
                 }
             }
         )
     })
 };
 
-function updateStockRepository(updatedStock, stockId){
+function updateSalesRepository(updatedSales, salesId){
     return new Promise ((resolve, reject) =>{
-        const {product_id, quantity, update_date} = updatedStock;
-        const fields =['product_id', 'quantity', 'update_date'];
-        let query = "UPDATE stock SET ";
+        const {order_id, total, sale_date} = updatedSales;
+        const fields =['order_id', 'total', 'sale_date'];
+        let query = "UPDATE sales SET ";
         const values = []
 
         fields.forEach((field)=>{
-            if(updatedStock[field] !== undefined){
+            if(updatedsales[field] !== undefined){
                 query += `${field} = ?,`
-                values.push(updatedStock[field]);
+                values.push(updatedSales[field]);
             }
         })
 
@@ -103,22 +102,22 @@ function updateStockRepository(updatedStock, stockId){
 
         query += " WHERE id = ?";
 
-        values.push(stockId);
+        values.push(salesId);
 
         db.run(query, values, (err) => {
             if(err){
                 reject(err);
             }else{
-                resolve({id: stockId, ...updatedStock})
+                resolve({id: salesId, ...updatedSales})
             }
         })
     });
 };
 
 export default {
-    createStockRepository,
-    findAllStockRepository,
-    findStockByIdRepository,
-    updateStockRepository,
-    deleteStockRepository
+    createSalesRepository,
+    findAllSalesRepository,
+    findSalesByIdRepository,
+    updateSalesRepository,
+    deleteSalesRepository
 }

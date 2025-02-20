@@ -1,6 +1,7 @@
 import { clientIdSchema } from "../schema/client.schema.js";
 import { productIdSchema } from "../schema/product.schema.js";
 import { stockIdSchema } from "../schema/stock.schema.js";
+import { salesIdSchema } from "../schema/sales.schema.js";
 //import { loanIdSchema } from '../schema/loan.schema.js';
 
 const validate = (schema) => (req, res, next) => {
@@ -34,6 +35,15 @@ const validateProductId = (req, res, next) => {
 const validateStockId = (req, res, next) => {
     try{
         stockIdSchema.parse({stockId: +req.params.id});
+        next();
+    } catch (e){
+        res.status(400).json({error: e.errors});
+    }
+};
+
+const validateSalesId = (req, res, next) => {
+    try{
+        salesIdSchema.parse({salesId: +req.params.id});
         next();
     } catch (e){
         res.status(400).json({error: e.errors});
