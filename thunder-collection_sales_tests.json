@@ -1,0 +1,280 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "sales_tests",
+    "collectionId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+    "dateExported": "2025-02-20T04:00:48.484Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "658ea02b-160f-4c7e-a2c9-72e566197176",
+            "name": "client",
+            "containerId": "",
+            "created": "2024-08-26T22:10:08.794Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "14138945-1df5-4947-b648-8eacd82aeab4",
+            "name": "product",
+            "containerId": "",
+            "created": "2024-08-26T22:10:19.548Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "3048ddc3-51ad-4daa-bca4-09f07314a4c2",
+            "name": "stock",
+            "containerId": "",
+            "created": "2025-02-19T02:27:28.000Z",
+            "sortNum": 25000
+        },
+        {
+            "_id": "0241a940-4595-4119-a1eb-f49a585cc4c9",
+            "name": "sales",
+            "containerId": "",
+            "created": "2024-08-26T22:10:26.867Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "a9fc5a8c-5722-4b7a-91db-3c083a50d25c",
+            "name": "order",
+            "containerId": "",
+            "created": "2025-02-20T03:26:33.190Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "06a4e86a-22a4-4861-8db0-209ac1803830",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "0241a940-4595-4119-a1eb-f49a585cc4c9",
+            "name": "CREATE",
+            "url": "http://localhost:3000/sales",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-08-26T22:10:51.168Z",
+            "modified": "2025-02-20T03:57:22.529Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"order_id\": 3, \n  \"total\": 100.00, \n  \"sale_date\": \"10/02/2025\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcyNTUwNzMyMywiZXhwIjoxNzI1NTkzNzIzfQ.xPwWuBVoKo8VJqMwDqsQvav8pZ6NmFwLap7eUBzVJCM"
+            }
+        },
+        {
+            "_id": "caa3f51f-517d-465d-8478-1e0b3a7f815a",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "658ea02b-160f-4c7e-a2c9-72e566197176",
+            "name": "CREATE",
+            "url": "http://localhost:3000/clients",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-08-28T22:25:14.328Z",
+            "modified": "2025-02-18T02:45:39.818Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Yuri\",\n  \"email\": \"yuri@gmail.com\",\n  \"phone\": \"912345678\",\n  \"address\": \"Av Senador Vergueiro, 177, apto 182, torre 3, 09633-022\"\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "f8c4666d-e6ec-4116-98b1-992d3e6e783a",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "0241a940-4595-4119-a1eb-f49a585cc4c9",
+            "name": "GETALL",
+            "url": "http://localhost:3000/sales",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-08-28T22:28:52.543Z",
+            "modified": "2025-02-20T02:50:15.578Z",
+            "headers": []
+        },
+        {
+            "_id": "62dbbb9f-d4d5-4f14-81f2-4998c7e5a96c",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "0241a940-4595-4119-a1eb-f49a585cc4c9",
+            "name": "UPDATE",
+            "url": "http://localhost:3000/sales/1",
+            "method": "PATCH",
+            "sortNum": 50000,
+            "created": "2024-08-28T22:32:05.968Z",
+            "modified": "2025-02-20T02:50:08.579Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"order_id\": 1, \n  \"total\": 120.00, \n  \"sale_date\": \"10/03/2025\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "2e4672ba-9c25-4f01-92ba-4f5681e5e7c1",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "658ea02b-160f-4c7e-a2c9-72e566197176",
+            "name": "DELETE",
+            "url": "http://localhost:3000/clients/1",
+            "method": "DELETE",
+            "sortNum": 80000,
+            "created": "2024-08-28T22:34:13.252Z",
+            "modified": "2025-02-18T02:45:08.058Z",
+            "headers": []
+        },
+        {
+            "_id": "f7788c41-c9f6-43bd-b967-5a2d39aac647",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "658ea02b-160f-4c7e-a2c9-72e566197176",
+            "name": "UPDATE",
+            "url": "http://localhost:3000/clients/1",
+            "method": "PATCH",
+            "sortNum": 90000,
+            "created": "2024-08-28T22:35:13.635Z",
+            "modified": "2025-02-18T02:44:23.725Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Gabriela\",\n  \"email\": \"gabigen.07@gmail.com\",\n  \"phone\": \"912345678\",\n  \"address\": \"Av Senador Vergueiro, 177, apto 182, torre 3, 09633-022\"\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "9f2f9fa7-a771-412a-9914-ff0e385b69e3",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "14138945-1df5-4947-b648-8eacd82aeab4",
+            "name": "CREATE",
+            "url": "http://localhost:3000/products",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2024-08-28T22:36:42.026Z",
+            "modified": "2025-02-18T03:10:13.849Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Mousepad\",\n  \"descrition\": \"Mousepad personalizado e com espuma.\",\n  \"price\": 10.2\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e2d75098-b2a7-43f5-902d-29a0fe125ea0",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "3048ddc3-51ad-4daa-bca4-09f07314a4c2",
+            "name": "CREATE",
+            "url": "http://localhost:3000/stock",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2025-02-19T02:27:28.000Z",
+            "modified": "2025-02-19T02:46:01.862Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"product_id\": 1,\n  \"quantity\": 20,\n  \"update_date\":\"18-02-2024\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "85c891a1-b6d4-499c-a6c3-d768da902995",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "14138945-1df5-4947-b648-8eacd82aeab4",
+            "name": "UPDATE",
+            "url": "http://localhost:3000/products/1",
+            "method": "PATCH",
+            "sortNum": 110000,
+            "created": "2024-08-28T22:38:03.333Z",
+            "modified": "2025-02-19T02:02:05.911Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Mousepad\",\n  \"descrition\": \"Mousepad personalizado e com espuma para apoio.\",\n  \"price\": 10.2\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "7dc4ae37-42b6-49b4-b4f8-12d368fa16b1",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "3048ddc3-51ad-4daa-bca4-09f07314a4c2",
+            "name": "UPDATE",
+            "url": "http://localhost:3000/stock/1",
+            "method": "PATCH",
+            "sortNum": 110000,
+            "created": "2025-02-19T02:27:28.001Z",
+            "modified": "2025-02-19T03:01:40.984Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"product_id\": 1,\n  \"quantity\": 60,\n  \"update_date\":\"19-02-2024\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c00a0f0d-f51e-439e-8d7f-e3feb6f1b765",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "14138945-1df5-4947-b648-8eacd82aeab4",
+            "name": "GETALL",
+            "url": "http://localhost:3000/products",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2024-08-28T22:44:22.575Z",
+            "modified": "2025-02-19T02:01:40.269Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImlhdCI6MTcyNTUwNjMwNiwiZXhwIjoxNzI1NTkyNzA2fQ.CAWFnogPq63id-wnoX3tOHe1lAvZnC-9YA3oFoi7fIU"
+            }
+        },
+        {
+            "_id": "7201b098-8758-4615-8ea3-89469f6eddcb",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "3048ddc3-51ad-4daa-bca4-09f07314a4c2",
+            "name": "GETALL",
+            "url": "http://localhost:3000/stock",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2025-02-19T02:27:28.002Z",
+            "modified": "2025-02-19T02:46:51.471Z",
+            "headers": []
+        },
+        {
+            "_id": "8c6acefb-f888-420e-9160-7eb7947d0808",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "14138945-1df5-4947-b648-8eacd82aeab4",
+            "name": "DELETE",
+            "url": "http://localhost:3000/products/1",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2024-08-28T22:47:29.285Z",
+            "modified": "2025-02-19T02:01:13.193Z",
+            "headers": []
+        },
+        {
+            "_id": "5f9c8043-1d07-4933-91e2-5a138d72b8b3",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "a9fc5a8c-5722-4b7a-91db-3c083a50d25c",
+            "name": "CREATE",
+            "url": "http://localhost:3000/orders",
+            "method": "POST",
+            "sortNum": 170000,
+            "created": "2025-02-20T03:27:17.333Z",
+            "modified": "2025-02-20T03:47:14.297Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"clientId\": 3,\n  \"productId\": 1,\n  \"quantity\": 90,\n  \"order_date\":\"18/02/2024\",\n  \"status\": \"pending\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "0e934761-38fd-4dcc-8a5e-975e3c8b5af6",
+            "colId": "90b0dc7c-cd4e-4864-84ed-aaadca2ae21d",
+            "containerId": "a9fc5a8c-5722-4b7a-91db-3c083a50d25c",
+            "name": "GETALL",
+            "url": "http://localhost:3000/orders",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2025-02-20T03:28:52.185Z",
+            "modified": "2025-02-20T03:29:01.774Z",
+            "headers": []
+        }
+    ],
+    "ref": "4SPYP013bpbQiZeEyFATipCe388iDDrtwJMZPOnLndlqrBSp4dLIfVv7iPdqOWDKDcopiALmylW8AWlxnmByDw"
+}
