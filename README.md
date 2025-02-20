@@ -2,7 +2,7 @@
 
 Este é um projeto de um banco de dados para gerenciamento de um sistema de vendas online. O banco de dados inclui tabelas para produtos, clientes, pedidos, vendas e estoque, podendo operar o CRUD nelas.
 
-### Pré-requisitos
+### 📌 Pré-requisitos
 
 Antes de rodar o projeto, certifique-se de ter instalado:
 
@@ -11,7 +11,7 @@ Antes de rodar o projeto, certifique-se de ter instalado:
 - MySQL ou SQLite
 - Thunder Client (modo free, sujeito a limitações de requisições)
 
-## Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 - Node.js - Plataforma para execução de código JavaScript no backend
 - Express.js - Framework minimalista para criação de APIs
@@ -19,6 +19,10 @@ Antes de rodar o projeto, certifique-se de ter instalado:
 - SQL - Linguagem para criação e manipulação de dados
 - Zod - Validação de esquemas de dados
 - Thunder Client - Ferramenta para testes de requisições de API
+
+## 📌 Modelo Lógico
+
+![Modelo lógico](https://github.com/user-attachments/assets/74b9b61f-1406-4874-a870-12e4ba99277f)
 
 ## 🏗️ Estrutura do Banco de Dados
 
