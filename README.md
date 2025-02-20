@@ -1,8 +1,10 @@
-# Sales DB
+# Sales DB - Gerenciamento de Vendas Online
 
 Este é um projeto de um banco de dados para gerenciamento de um sistema de vendas online. O banco de dados inclui tabelas para produtos, clientes, pedidos, vendas e estoque, podendo operar o CRUD nelas.
 
 ### Pré-requisitos
+
+Antes de rodar o projeto, certifique-se de ter instalado:
 
 - Node.js (v14.x ou superior)
 - npm (Node Package Manager) ou yarn
@@ -11,12 +13,14 @@ Este é um projeto de um banco de dados para gerenciamento de um sistema de vend
 
 ## Tecnologias Utilizadas
 
-- Node.js
-- Express.js
-- SQLite (ou outro banco de dados relacional como MySQL)
-- Zod para validação de esquemas de dados
+- Node.js - Plataforma para execução de código JavaScript no backend
+- Express.js - Framework minimalista para criação de APIs
+- SQLite (ou outro banco de dados relacional como MySQL) - Banco de dados relacional
+- SQL - Linguagem para criação e manipulação de dados
+- Zod - Validação de esquemas de dados
+- Thunder Client - Ferramenta para testes de requisições de API
 
-## Estrutura do Banco de Dados
+## 🏗️ Estrutura do Banco de Dados
 
 ### 🏷️ Produtos (products)
 
@@ -37,7 +41,7 @@ Este é um projeto de um banco de dados para gerenciamento de um sistema de vend
         address TEXT NOT NULL
     );
 
-### 🛍️ Pedidos (pedidos)
+### 🛍️ Pedidos (orders)
 
     CREATE TABLE IF NOT EXISTS orders (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,7 +54,7 @@ Este é um projeto de um banco de dados para gerenciamento de um sistema de vend
       FOREIGN KEY (productId) REFERENCES products(id)
     );
 
-### 💰 Vendas (vendas)
+### 💰 Vendas (sales)
 
     CREATE TABLE IF NOT EXISTS sales (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,3 +63,17 @@ Este é um projeto de um banco de dados para gerenciamento de um sistema de vend
         sale_date TEXT DEFAULT (strftime('%d-%m-%Y', 'now')),
         FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
     );
+
+### 📦 Estoque (stock)
+
+    CREATE TABLE IF NOT EXISTS stock (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        product_id INT UNIQUE NOT NULL,
+        quantity INT NOT NULL,
+        update_date TEXT DEFAULT (strftime('%d-%m-%Y', 'now')),
+        FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+    );
+
+## 🛠️ Testando as Requisições
+
+As requisições podem ser feitas utilizando o Thunder Client no modo free, que possui limitações no número de requisições.
