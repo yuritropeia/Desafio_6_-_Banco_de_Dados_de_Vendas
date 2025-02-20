@@ -1,7 +1,6 @@
 import express from 'express';
 import { routers } from './src/routes/index.js';
 import "dotenv/config";
-import "./src/service/cron.services.js";
 
 const app = express();
 

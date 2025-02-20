@@ -2,7 +2,7 @@ import { clientIdSchema } from "../schema/client.schema.js";
 import { productIdSchema } from "../schema/product.schema.js";
 import { stockIdSchema } from "../schema/stock.schema.js";
 import { salesIdSchema } from "../schema/sales.schema.js";
-//import { loanIdSchema } from '../schema/loan.schema.js';
+import { orderIdSchema } from '../schema/order.schema.js';
 
 const validate = (schema) => (req, res, next) => {
     try{
@@ -50,9 +50,9 @@ const validateSalesId = (req, res, next) => {
     }
 };
 
-const validateLoanId = (req, res, next) => {
+const validateOrderId = (req, res, next) => {
     try {
-        loanIdSchema.parse({ loanId: +req.params.id });
+        orderIdSchema.parse({ orderId: +req.params.id });
         next();
     } catch (e) {
         res.status(400).json({ error: e.errors });
@@ -62,6 +62,7 @@ const validateLoanId = (req, res, next) => {
 export {validate,
     validateClientId,
     validateProductId,
-    validateLoanId,
-    validateStockId
+    validateOrderId,
+    validateStockId,
+    validateSalesId
 };
