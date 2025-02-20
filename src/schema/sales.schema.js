@@ -5,11 +5,10 @@ const salesSchema = z.object({
     total: z
     .number()
     .positive("Total must be a positive number")
-    .refine(value => Number.isFinite(value) && !Number.isInteger(value), {
+    .refine(value => Number.isFinite(value), {
       message: "Total must be a float (e.g., 99.99)",
     }),
-    sale_date: z.string().regex(/^\d{2}-\d{2}-\d{4}$/, "Invalid format. Use DD-MM-YYYY").optional()
-    ,
+    sale_date: z.string().regex(/^\d{2}[/]\d{2}[/]\d{4}$/, "Invalid format. Use DD-MM-YYYY").optional(),
 });
 
 const salesIdSchema = z.object({

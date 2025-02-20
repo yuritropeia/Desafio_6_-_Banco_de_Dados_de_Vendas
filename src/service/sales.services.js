@@ -1,7 +1,7 @@
 import salesRepository from '../repositories/sales.repositories.js'
 
 async function  createSalesService(newSales){   
-    const createdsales = await salesRepository.createSalesRepository(
+    const createdSales = await salesRepository.createSalesRepository(
         newSales
     );
     if(!createdSales) throw new Error("Error creating sales");
